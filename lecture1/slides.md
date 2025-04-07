@@ -617,533 +617,331 @@ level: 2
 transition: slide-up
 level: 2
 ---
-  
-# Navigation
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/ui#navigation-bar)
+# Word2Vec的训练方法(Skip-gram)
 
-## Keyboard Shortcuts
-
-|                                                     |                             |
-| --------------------------------------------------- | --------------------------- |
-| <kbd>right</kbd> / <kbd>space</kbd>                 | next animation or slide     |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd>                                       | previous slide              |
-| <kbd>down</kbd>                                     | next slide                  |
-
-<!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
-  v-click
-  class="absolute -bottom-9 -left-7 w-80 opacity-50"
-  src="https://sli.dev/assets/arrow-bottom-left.svg"
-  alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
-
-
----
-layout: image-right
-image: https://cover.sli.dev
----
-  
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover!
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
-```
-
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
-
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
-
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
-
----
-level: 2
----
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: 'John Doe',
-        books: [
-          'Vue 2 - Advanced Guide',
-          'Vue 3 - Basic Guide',
-          'Vue 4 - The Mystery'
-        ]
-      }
-    }
-  }
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: 'John Doe',
-      books: [
-        'Vue 2 - Advanced Guide',
-        'Vue 3 - Basic Guide',
-        'Vue 4 - The Mystery'
-      ]
-    }
-  })
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: 'John Doe',
-  books: [
-    'Vue 2 - Advanced Guide',
-    'Vue 3 - Basic Guide',
-    'Vue 4 - The Mystery'
-  ]
-}
-</script>
-```
-````
-
----
-
-# Components
+基于Word2Vec模型的词向量构建
 
 <div grid="~ cols-2 gap-4">
 <div>
 
-You can use Vue components directly inside your slides.
-
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
-
-```html
-<Counter :count="10" />
-```
-
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
+- Word2Vec模型中, 神经网络中输入层和隐藏层之间的权重矩阵通常被视为词向量
+    - 权重矩阵$W$的大小为$V\times N$
+       - $V$: 词汇表的长度
+       - $N$: 自定义的词向量维度（如 100 或 300）
+    - 训练过程中，模型根据预测误差通过反向传播来更新权重矩阵
+       - 不断地根据语境信息被微调
+       - 训练完成后，$W$中的每一行就表示对应词的词向量
 </div>
+
 <div>
 
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
+<div style="display: flex; justify-content: center;">
+  <img src="./image/word_embedding_nn.png" width="350" />
+</div>
 </div>
 </div>
 
-<!--
-Presenter note with **bold**, *italic*, and ~~striked~~ text.
-
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
--->
-
 ---
-class: px-20
+transition: fade-out
+level: 1
 ---
 
-# Themes
+# Word2Vec的实操
 
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
+Gensim
 
-<div grid="~ cols-2 gap-2" m="t-2">
 
-```yaml
----
-theme: default
----
-```
+- Gensim是一个开源的关于自然语言处理的Python库
+    - 提供了高效的关于词向量操作的各种实现
 
-```yaml
----
-theme: seriph
----
-```
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
-
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
-
-</div>
-
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
 
 ---
-
-# Clicks Animations
-
-You can add `v-click` to elements to add a click animation.
-
-<div v-click>
-
-This shows up when you click the slide:
-
-```html
-<div v-click>This shows up when you click the slide.</div>
-```
-
-</div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
-</div>
-
+transition: fade-out
+level: 1
 ---
 
-# Motions
+# Word2Vec在社会科学中的应用
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+- 利用Word2Vec进行文本分析
+   - 作为一种将词语转换为向量表示的技术,可以捕捉和表示文本的语义辅助多种自然语言处理任务
+       - 文本分类
+       - 文本聚类
 
-```html
-<div
-  v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
->
-  Slidev
-</div>
-```
+- **利用word2vec的训练原理捕捉语义的变迁**
+    - 语义随着社会发展而变化,反映了社会意识形态、权力结构和文化焦点的转移
+       - 语义定义的内在复杂性
+       - 长期间跨度的系统性分析存在困难
+    - 利用Word2vec捕捉语义变迁的可能性
+       - Word2vec可以实现对于语义的定量化表达,实现不同时期的系统性分析
+       - Word2vec的词向量表达依赖于训练语料库, 反映语料库中呈现的词语共现模式和语义关系
+           - 不同时代的语料库可以反映相应时代背景下下特定概念的语义特质
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
-  </div>
 
-  <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
-    v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
-  </div>
-</div>
+---
+transition: fade-out
+level: 1
+---
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
+# Word2Vec的应用
 
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
+[Garg, Schiebinger, Jurafsky, & Zou (2018)](https://www.pnas.org/doi/10.1073/pnas.1720347115)
 
-[Learn more](https://sli.dev/guide/animations.html#motion)
+- **研究概要**: 利用词向量量化分析了过去一百年美国社会中性别和种族刻板印象的演变
+- **数据**:针对特定时间段训练独立的词向量模型(基于Google Books)
+    - 词向量都是在20世纪的十年期间的文本数据上独立训练 →　词向量可以反映相应时期的语义关系
+- **分析方法**: 运用词向量的几何关系捕捉了相应单词之间的语义关系,以此来捕捉关于特定对象的“刻板印象”
+    - 以性别上的职业偏见为例: "护士"的词向量与“女性”的词向量有更高的相似性; “消防员”的词向量与“男性”的词向量有更高的相似性
+    - 构建群体向量(以性别分析为例)
+        - 为每个性别（男性、女性）创建代表性向量: 选取性别中若干代表性词语（例如代词，如 she, female）的向量的平均值来实现
+    - 构建参照对象向量
+        - 选取职业名称或形容词并提取其词向量作为参照对象
+    - 计算性别向量和参照对象向量之间的关系来量化性别的“刻板印象”
 
+---
+transition: slide-up
+level: 2
+---
+
+# Word2Vec的应用
+
+[Garg, Schiebinger, Jurafsky, & Zou (2018)](https://www.pnas.org/doi/10.1073/pnas.1720347115)
+
+- **分析指标**: 
+    - $\text{relative norm distance} = \sum_{v_m \in M} \left( \|v_m - v_1\|_2 - \|v_m - v_2\|_2 \right)$
+        - $M$: 参照对象词语（例如职业名称或形容词）的向量集合
+        - $v_m$: 集合$M$中每个参照对象词语的词向量
+        - $v_1$: 第一个群体（例如男性）的代表性向量，通过取该群体中若干代表性词语（例如代词或姓氏）的向量的平均值得到
+        - $v_2$: 第二个群体（例如女性）的代表性向量，同样通过取该群体中若干代表性词语的向量的平均值得到
+        - $|u-v|_2$: 向量$u$和$v$之间的欧几里得距离的平方
+    - 指标含义
+        - 负值表示参照对象词语更倾向于与第一个群体相关联
+        - 正值表示参照对象词语更倾向于与第二个群体相关联
+        - 绝对值表示与其中一个群体的关联性程度
+
+---
+transition: slide-up
+level: 2
+---
+
+# Word2Vec的应用
+
+[Garg, Schiebinger, Jurafsky, & Zou (2018)](https://www.pnas.org/doi/10.1073/pnas.1720347115)
+
+- 方法的有效性检验: 比较词向量和外部数据(职业的性别比例)中反映的偏见趋势
+
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/pnas_fig.jpeg" width="550" />
 </div>
 
 ---
-
- 
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-$$ {1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
+transition: slide-up
+level: 2
 ---
 
- 
-# Diagrams
+# Word2Vec的应用
 
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
+[Garg, Schiebinger, Jurafsky, & Zou (2018)](https://www.pnas.org/doi/10.1073/pnas.1720347115)
 
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
+- 方法的有效性检验: 比较词向量和外部数据(职业的性别比例差距)中反映的偏见趋势变化
 
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
 
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
+<div style="display: flex; justify-content: center;">
+  <img src="/image/pnas_fig02.jpeg" width="550" />
+</div>
 
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
 
-```plantuml {scale: 0.7}
-@startuml
 
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
 
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
+---
+transition: fade-out
+level: 1
+---
 
-cloud {
-  [Example 1]
-}
+# Word2Vec的应用
 
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
+[Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)
 
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
+- 社会阶层(Class)的文化维度及其演变
+    - 社会阶层是一个复杂且多维度的概念: 包含财富、教育、职业、地位等多方面等因素
+        - 词向量技术将词语嵌入到一个高维的向量空间中, 在这个空间中，每个维度都可能蕴含着一定的"文化"意义
+    - 不同阶层维度之间关系的动态变化
+        - 基于不同历史时期的语料训练的词向量模型可以反映随时间演变的动态变化
 
-@enduml
-```
+- [Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)详细阐述了如何利用词向量技术实现针对复杂概念的分析
+    - 利用词向量的计算构建理解特定复杂概念的维度
+    - 利用词向量的计算理解概念与维度之间的关系
+    - 利用词向量的计算理解不同维度之间的关系
+    - 利用词向量的计算理解维度语义的演变
+
+---
+transition: slide-up
+level: 2
+---
+
+# 利用词向量的计算构建理解特定复杂概念的维度
+
+[Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+- **构建维度**: 计算一组具有相反语义的词语集合之间词向量差的平均值
+    - 构建“*富裕*”维度: 计算“rich” - “poor”，“priceless” - “worthless”等词对的向量差的平均值
+- **词语在文化维度上的投影**: 通过计算其他词语的向量在这个维度向量上的正交投影（即余弦相似度），来确定该词语与该文化维度的关联程度
+    - 某个词语的向量与文化维度向量之间的夹角越小, 说明它们之间的关系越紧密(余弦相似度越高)
+
+$$cos(\theta))=\frac{D \cdot V}{|D||V|}$$
+
+$$\theta = \arccos(cos(\theta))$$
 
 </div>
 
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
+<div>
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/Kozlowski-1.jpg" width="300" />
+</div>
+</div>
+</div>
+
+
 
 ---
-foo: bar
-dragPos:
-  square: 656,15,177,_,-16
+transition: slide-up
+level: 2
 ---
 
-# Draggable Elements
+# 利用词向量的计算维度的演变
 
-Double-click on the draggable elements to edit their positions.
+[Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)
 
-<br>
+<div grid="~ cols-2 gap-4">
+<div>
 
-###### Directive Usage
+- **不同维度之间的关系**: 通过计算不同文化维度向量之间的角度（余弦相似度），可以了解这些维度在文化意义上的关联性和独立性
+    - 如果两个维度的向量之间的角度接近90度，则表明它们在语义概念上相对独立
+- 基于在不同时期语料库上训练的词向量模型可以帮助理解维度关系的演变
+    - “富裕”维度在二十世纪初与“文化修养”和“地位”维度最为接近
+</div>
 
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
+<div>
 
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
+<div style="display: flex; justify-content: center;">
+  <img src="/image/Kozlowski-2.jpg" width="800" />
+</div>
+</div>
+</div>
 
 ---
-src: ./pages/imported-slides.md
-hide: false
+transition: slide-up
+level: 2
 ---
 
+# 利用词向量的计算维度语义的演变
+
+[Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)
+
+
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+- **维度语义的演变**
+
+    - 计算维度向量在每个十年的词语投影与之后每个十年的词语投影之间的相关性
+- 社会阶层的基本维度结构是稳定的，但构成这些维度的具体词语的文化意义和相对位置也在不断演变
+    - 在财富维度上，1900 年代被认为是“富裕”的词语，与 1990 年代被认为是“富裕”的词语，其相对排序仍然有很高的相关性，但随着时间的推移，这种相关性会减弱。
+    - 不同维度下降速度的差异
+
+</div>
+
+<div>
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/Kozlowski-3.jpg" width="280" />
+</div>
+</div>
+</div>
+
+
+---
+transition: fade-out
+level: 1
 ---
 
-# Monaco Editor
+# Word2Vec的应用
 
-Slidev provides built-in Monaco Editor support.
+Historical Representations of Well-being
 
-Add `{monaco}` to the code block to turn it into an editor:
+- 利用词向量模型理解"Well-being"的维度及其演变
+    - "Well-being"是一个复杂且多维度的概念
+        - Hedonic Well-being(享乐式幸福):以快乐和痛苦的减少为核心目标，强调短期的满足和愉悦
+        - Eudaimonic Well-being: 关注 自我实现、个人成长、目标感、意义感，认为幸福不仅仅是快乐，而是实现人的潜力和内在价值
+    - 不同时期Well-being侧重点变化
 
-```ts {monaco}
-import { ref } from 'vue'
-import { emptyArray } from './external'
+- 使用日本国会图书馆所提供的包含1910 年代至 1980 年代期间出版的杂志、书籍和官方公报的语料库
+- 按年份进行切分，并为每个时间段训练特定的词向量模型
 
-const arr = ref(emptyArray(10))
-```
-
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
-
-```ts {monaco-run}
-import { version } from 'vue'
-import { emptyArray, sayHello } from './external'
-
-sayHello()
-console.log(`vue ${version}`)
-console.log(emptyArray<number>(10).reduce(fib => [...fib, fib.at(-1)! + fib.at(-2)!], [1, 1]))
-```
 
 ---
-layout: center
-class: text-center
+transition: slide-up
+level: 2
 ---
 
-# Learn More
+# Word2Vec的应用
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+Historical Representations of Well-being
 
-<PoweredBySlidev mt-10 />
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/well1.png" width="400" />
+</div>
+
+</div>
+
+<div>
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/well2.png" width="400" />
+</div>
+</div>
+</div>
+
+
+---
+transition: slide-up
+level: 2
+---
+
+# Word2Vec的应用
+
+Historical Representations of Well-being
+
+
+- Well-being与不同维度之间的相关性
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/well3.png" width="550" />
+</div>
+
+---
+transition: slide-up
+level: 2
+---
+
+# Word2Vec的应用
+
+Historical Representations of Well-being
+
+
+- Well-being与不同维度之间的相关性的演变
+
+<div style="display: flex; justify-content: center;">
+  <img src="/image/well4.png" width="450" />
+</div>
+
