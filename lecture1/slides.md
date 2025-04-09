@@ -29,9 +29,9 @@ fonts:
   bold: Source Han Sans Bold
 ---
 
- ### <span style="color:grey;">心研社学工作坊 </span>
+### <span style="color:grey;">心研社学工作坊 </span>
 
-## 自然语言处理在社会科学中的应用
+## 自然语言处理在社会科学中的应用 (part1)
 
 日本东北大学 计算人文社会学
 
