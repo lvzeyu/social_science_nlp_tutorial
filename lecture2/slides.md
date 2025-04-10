@@ -508,7 +508,7 @@ level: 1
 
 ---
 transition: slide-up
-level: 1
+level: 2
 ---
 
 # BERT的应用: BERTopic
@@ -537,79 +537,53 @@ BERTopic通过BERT(或其变体)的语义表示能力和聚类算法进行主题
 </div>
 </div>
 
+---
+transition: slide-up
+level: 1
+---
+
+# BERT的应用: 文本分类
+
+
+- BERT 首先在大规模的语料库上进行预训练（Pre-training）
+    - 在预训练阶段，BERT 获取了丰富的语言知识，如语法结构、上下文关系等，成为一个 通用的语言表示模型
+- BERT 可以被微调（Fine-tuning）以适应具体的下游任务
+    - BERT 模型会根据特定任务的标签数据进行进一步训练
+    - 模型能够将 预训练获得的通用知识转移到特定任务上，并根据任务的特点进行调整
+
+<div style="display: flex; justify-content: center;">
+  <img src="./image/fine-tuning_methods.png" width="800" />
+</div>
+
 
 ---
-layout: two-cols
-layoutClass: gap-16
----
-
-# Table of contents
-
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1" />
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc text-sm minDepth="1" maxDepth="2" />
-
----
-layout: image-right
-image: https://cover.sli.dev
+transition: slide-up
+level: 1
 ---
 
 # Code
 
 Use code snippets and get the highlighting directly, and even types hover!
 
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
-import { computed, ref } from 'vue'
-
-const count = ref(0)
-const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
+````md magic-move {lines: true}
+```ts {*|3|*}
+from transformers import AutoTokenizer
+from transformers import AutoModel
+model_ckpt = "distilbert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(model_ckpt)
+model = AutoModel.from_pretrained(model_ckpt).to(device)
 ```
 
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
+```ts {*|1-2|3-4|3-4,8}
+from transformers import AutoTokenizer
+from transformers import AutoModel
+model_ckpt = "bert-base-chinese"
+tokenizer = AutoTokenizer.from_pretrained(model_ckpt)
+model = AutoModel.from_pretrained(model_ckpt).to(device)
 
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
+```
 
-<!-- Footer -->
-
-[Learn more](https://sli.dev/features/line-highlighting)
-
-<!-- Inline style -->
-<style>
-.footnotes-sep {
-  @apply mt-5 opacity-10;
-}
-.footnotes {
-  @apply text-sm opacity-75;
-}
-.footnote-backref {
-  display: none;
-}
-</style>
-
-<!--
-Notes can also sync with clicks
-
-[click] This will be highlighted after the first click
-
-[click] Highlighted with `count = ref(0)`
-
-[click:3] Last click (skip two clicks)
--->
+```
 
 ---
 level: 2
