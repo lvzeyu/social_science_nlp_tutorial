@@ -41,7 +41,7 @@ fonts:
 吕泽宇
 
 <div class="abs-br m-6 text-xl">
-  <a href="https://github.com/slidevjs/slidev" target="_blank" class="slidev-icon-btn">
+  <a href="https://github.com/lvzeyu/social_science_nlp_tutorial" target="_blank" class="slidev-icon-btn">
     <carbon:logo-github />
   </a>
 </div>
