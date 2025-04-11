@@ -46,8 +46,9 @@ fonts:
   </a>
 </div>
 
-
-
+<!--
+The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide.
+-->
 
 ---
 transition: fade-out
