@@ -86,6 +86,10 @@ transition: fade-out
 }
 </style>
 
+<!--
+
+-->
+
 ---
 
 # 内容构成
@@ -899,7 +903,7 @@ Historical Representations of Well-being
 <div>
 
 <div style="display: flex; justify-content: center;">
-  <img src="/image/well1.png" width="400" />
+  <img src="/image/sports.png" width="400" />
 </div>
 
 </div>
@@ -907,7 +911,7 @@ Historical Representations of Well-being
 <div>
 
 <div style="display: flex; justify-content: center;">
-  <img src="/image/well2.png" width="400" />
+  <img src="/image/city.png" width="400" />
 </div>
 </div>
 </div>
@@ -923,10 +927,8 @@ level: 2
 Historical Representations of Well-being
 
 
-- Well-being与不同维度之间的相关性
-
 <div style="display: flex; justify-content: center;">
-  <img src="/image/well3.png" width="550" />
+  <img src="/image/stability.png" width="800" />
 </div>
 
 ---
@@ -942,6 +944,6 @@ Historical Representations of Well-being
 - Well-being与不同维度之间的相关性的演变
 
 <div style="display: flex; justify-content: center;">
-  <img src="/image/well4.png" width="450" />
+  <img src="/image/similarity_dynamics_jp.png" width="450" />
 </div>
 
