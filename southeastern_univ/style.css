@@ -1,0 +1,32 @@
+/* 自定义中文字体样式 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@400;700&display=swap');
+
+/* 覆盖所有标题字体 */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Noto Sans SC', sans-serif !important;
+}
+
+/* 确保正文也使用中文字体 */
+body, p, div, span {
+  font-family: 'Noto Sans SC', sans-serif !important;
+}
+
+/* 特别处理首页标题 */
+.slidev-layout.intro h1,
+.slidev-layout.intro h2 {
+  font-family: 'Noto Sans SC', sans-serif !important;
+  font-weight: 700 !important;
+}
+
+.slidev-layout.intro h3 {
+  font-family: 'Noto Sans SC', sans-serif !important;
+  font-weight: 400 !important;
+}
+
+/* 全局二维码固定在右上角 */
+.slidev-layout:not(.intro) .qrcode-fixed {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+}
