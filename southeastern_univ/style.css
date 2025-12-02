@@ -11,6 +11,17 @@ body, p, div, span {
   font-family: 'Noto Sans SC', sans-serif !important;
 }
 
+/* 确保强调文字(code、inline code等)也使用中文字体 */
+code, kbd, pre, samp {
+  font-family: 'Noto Sans SC', 'Roboto Mono', monospace !important;
+}
+
+/* 确保行内代码也使用中文字体 */
+:not(pre) > code {
+  font-family: 'Noto Sans SC', sans-serif !important;
+  font-weight: 600 !important;
+}
+
 /* 特别处理首页标题 */
 .slidev-layout.intro h1,
 .slidev-layout.intro h2 {
@@ -23,10 +34,4 @@ body, p, div, span {
   font-weight: 400 !important;
 }
 
-/* 全局二维码固定在右上角 */
-.slidev-layout:not(.intro) .qrcode-fixed {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-}
+
