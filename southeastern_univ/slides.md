@@ -187,7 +187,7 @@ color: indigo-light
 
 <hr>
 
-自然语言处理技术的发展脉络及对于其核心技术的直观理解
+自然语言处理技术的发展脉络及对于其核心技术「词向量」的直观理解
 
 ---
 layout: top-title
@@ -842,11 +842,11 @@ layout: section
 color: indigo-light
 ---
 
-# `大语言模型`在社会科学中的应用 
+# `大语言模型`的核心原理
 
 <hr>
 
-大语言模型的核心理解以及在社会模拟的角度上的应用潜力
+大语言模型的核心概念理解
 
 ---
 layout: top-title-two-cols
@@ -886,7 +886,7 @@ color: indigo-light
 
 <v-click>
 
-<Admonition title="建立大语言模型的瓶颈" color="purple-light" custom="text-lg font-bold" customTitle="text-red-500">
+<Admonition title="建立大语言模型的瓶颈" color="indigo-light" custom="text-lg font-bold" customTitle="text-red-500">
 有效率地训练大规模的语言模型并不容易
 </Admonition>
 
@@ -972,4 +972,120 @@ const toggleAttentionImage = () => {
   <div style="background-color: #506720ff; padding: 0.5rem 1rem; border-radius: 6px;">
     <p style="color: white; font-weight: 600; font-size: 1.1rem; margin: 0; text-align: center;">Decoder</p>
   </div>
+</div>
+
+
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# 大语言模型的通用性
+
+:: content ::
+
+> “几乎所有 NLP 任务”都能转化为文本生成
+
+
+
+| 任务     | 输入示例                              | 输出示例                         | 生成式转化形式（Prompt）                     |
+|--------------|---------------------------------------|----------------------------------|-----------------------------------------------|
+| 文本分类     | 一段文本：This movie is fantastic.    | Positive                         | Text: This movie is fantastic. Sentiment: ___ |
+| 问答         | 问题：Who wrote Hamlet?               | William Shakespeare              | Q: Who wrote Hamlet? A: ___                    |
+| 翻译         | 英文句子：How are you?                | 法文：Comment ça va ?            | Translate English to French: How are you? ___ |
+| 摘要         | 文章：Artificial intelligence...      | 简要：AI is a branch of CS...    | Summarize the following: Artificial... ___    |
+
+
+---
+layout: section
+color: indigo-light
+---
+
+
+# 大语言模型在`社会模拟`中的应用 
+<hr>
+
+比较基于大语言模型的社会模拟与传统社会模拟方法, 讨论其应用方向
+
+
+
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# 社会科学中的社会模拟方法:Macro-Micro Link
+
+:: content ::
+
+<div style="display: flex; justify-content: center;">
+  <img src="/Figure/mirco-macro.png" width="700" />
+</div>
+
+
+- 宏观层面的制度、规则、文化、社会结构会影响个体行为
+- 个体之间的互动会产生一些集体行为
+- 大量个体行为聚合后，形成新的宏观社会现象（bottom-up emergence）
+
+---
+layout: iframe-right
+title: iframe Right Layout
+# the web page source
+url: http://nifty.stanford.edu/2014/mccown-schelling-model-segregation/
+
+# a custom class name to the content
+class: my-cool-content-on-the-right
+slide_info: false
+---
+
+# 社会科学中的社会模拟方法: Agent based Model
+
+- **社会模拟的核心思想**: Agent按照局部规则独立行动，最后产生宏观社会结构
+- 环境(Environment)设置
+    - 以一个二维网格表示居住空间
+- Agent=居民: 不同人种的居民
+    - 每个居民都会==观察==邻域中同类居民的比例
+    - 若比例低于其==容忍度==,居民就就会选择移动位置
+
+<AdmonitionType type="important" width="300px">
+Agent 的特征和行为通过数学形式化来定义
+</AdmonitionType>
+
+
+
+---
+transition: slide-up
+level: 2
+---
+
+# LLMs Agent的应用: Generative Agents 
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+- ​部署了25个生成式智能体，每个智能体都通过LLMs设置了独特的背景信息、日常计划和行为目标。
+    - 记忆（Memory）：​以自然语言形式存储和检索过往经验。​
+    - 反思（Reflection）：​对记忆进行整合，形成高层次的洞察，以指导未来行为。​
+    - 规划（Planning）：​制定和调整日常计划，响应环境变化。
+- 在没有预设的情况下，==智能体之间自发产生了社交行为==
+</div>
+
+<div>
+
+<div style="display: flex; justify-content: center;">
+  <img src="./Figure/generative-ai.png" width="500" />
+</div>
+</div>
+</div>
+
+<div class="abs-br m-6 text-xl">
+  <a href="https://arxiv.org/abs/2304.03442" target="_blank" class="slidev-icon-btn">
+    <carbon:document />
+  </a>
 </div>
