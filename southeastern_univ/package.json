@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@katzumi/slidev-addon-qrcode": "^0.0.17",
-    "@slidev/cli": "^52.10.0",
+    "@slidev/cli": "^52.10.1",
     "@slidev/theme-default": "latest",
     "@slidev/theme-seriph": "latest",
     "slidev-theme-neversink": "^0.4.0",

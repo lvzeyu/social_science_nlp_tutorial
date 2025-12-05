@@ -169,6 +169,8 @@ align: lt
 
 :: content ::
 
+<v-clicks depth="2">
+
 ## 自然语言处理核心技术的理解
 - 词向量(Word Embedding)
 - (大)语言模型 (Language Model)
@@ -177,6 +179,8 @@ align: lt
 - 基于词向量的语义解构方法
 - 基于大语言模型的社会模拟
 
+</v-clicks>
+ 
 ---
 layout: section
 color: indigo-light
@@ -303,6 +307,8 @@ align: lt
 
 :: content ::
 
+<v-clicks depth="2">
+
 - 假设我们有以下英文句子："I like NLP and AI"
 - ==为文本中的每个独立词构建一个词汇表，并为每个词分配一个唯一的索引==
 - 该向量只有一个位置为 1（对应该词的索引），其余为 0
@@ -315,6 +321,7 @@ align: lt
 | and    | [0, 0, 0, 1, 0]        |
 | AI     | [0, 0, 0, 0, 1]        |
 
+</v-clicks>
 
 
 ---
@@ -330,6 +337,7 @@ title: Side Title Layout (Another)
 
 # One-hot Encoding的问题
 
+<v-clicks depth="2">
 
 - 算法上的缺陷
     - 高维稀疏
@@ -338,6 +346,8 @@ title: Side Title Layout (Another)
 - 无法反映语义关系
     - 向量之间的距离或夹角==应当可以==反映词语间的语义相似程度或者联系
     - 词之间的语义关系==应当可以==通过向量运算表达
+
+</v-clicks>
 
 :: content ::
 
@@ -517,6 +527,7 @@ align: lt
 
 :: content ::
 
+<v-clicks depth="3">
 
 - 利用Word2Vec进行文本分析
    - 作为一种将词语转换为向量表示的技术,可以捕捉和表示文本的语义辅助多种自然语言处理任务
@@ -531,7 +542,8 @@ align: lt
        - Word2vec可以实现对于语义的定量化表达,实现不同时期的系统性分析
        - Word2vec的词向量表达依赖于训练语料库, 反映语料库中呈现的词语共现模式和语义关系
            - 不同时代的语料库可以反映相应时代背景下下特定概念的语义特质
-
+</v-clicks>
+ 
 
 ---
 layout: top-title
@@ -691,10 +703,16 @@ title: Side Title Layout (Another)
 
 # 利用词向量的计算构建理解特定复杂概念的维度
 
+<v-clicks depth="3">
+
+
 - **构建维度**: 计算一组具有相反语义的词语集合之间词向量差的平均值
     - 构建“*富裕*”维度: 计算 $rich - poor$，$priceless - worthless$等词对的向量差的平均值
 - **词语在文化维度上的投影**: 通过计算其他词语的向量在这个维度向量上的正交投影（即余弦相似度），来确定该词语与该文化维度的关联程度
     - 某个词语的向量与文化维度向量之间的夹角越小, 说明它们之间的关系越紧密(余弦相似度越高)
+
+</v-clicks>
+
 
 :: content ::
 
@@ -716,9 +734,13 @@ title: Side Title Layout (Another)
 
 # 利用词向量的计算维度关系演变
 
+<v-clicks depth="3">
+
 - **不同维度之间的关系**: 通过计算不同文化维度向量之间的角度（余弦相似度），可以了解这些维度在文化意义上的关联性和独立性
     - 如果两个维度的向量之间的角度接近90度，则表明它们在语义概念上相对独立
 - 基于在不同时期语料库上训练的词向量模型可以帮助理解维度关系的演变
+
+</v-clicks>
 
 :: content ::
 
@@ -742,10 +764,14 @@ title: Side Title Layout (Another)
 
 # 利用词向量的计算概念稳定性的演变
 
+<v-clicks depth="3">
+
 - 计算维度向量在每个十年的词语投影与之后每个十年的词语投影之间的相关性
 - 社会阶层的基本维度结构是稳定的，但构成这些维度的具体词语的文化意义和相对位置也在不断演变
     - 1900 年代被认为是「富裕」的词语，与 1990 年代被认为是「富裕」的词语，其相对排序仍然有很高的相关性
     - 不同维度下降速度的差异表现了语义稳定性的差异
+
+</v-clicks>
 
 :: content ::
 
@@ -768,7 +794,10 @@ align: lt
 
 :: content ::
 
+
 **研究关心:** 利用词向量模型理解「Well-being」的概念结构及其演变
+
+<v-clicks depth="4">
 
 - 「Well-being」是一个复杂且多维度的概念
     - Hedonic Well-being(享乐式幸福):以快乐和痛苦的减少为核心目标，强调短期的满足和愉悦
@@ -777,9 +806,10 @@ align: lt
 
 **数据和方法**
 
-- 使用[日本国会图书馆所](https://lab.ndl.go.jp/ngramviewer/)提供的包含1910 年代至 1980 年代期间出版的杂志、书籍和官方公报的语料库
+- 使用[日本国会图书馆](https://lab.ndl.go.jp/ngramviewer/)提供的包含1910 年代至 1980 年代期间出版的杂志、书籍和官方公报的语料库
 - 按照年份进行切分为每个时间段训练相应的词向量模型
 
+</v-clicks>
 
 ---
 layout: top-title
@@ -971,5 +1001,39 @@ const toggleAttentionImage = () => {
 <div v-click="1" style="position: absolute; top: 120px; left: 750px; right: 100px; height: 310px; background-color: rgba(184, 241, 99, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
   <div style="background-color: #506720ff; padding: 0.5rem 1rem; border-radius: 6px;">
     <p style="color: white; font-weight: 600; font-size: 1.1rem; margin: 0; text-align: center;">Decoder</p>
+  </div>
+</div>
+
+
+---
+layout: top-title-two-cols
+columns: is-7
+align: l-lt-lt
+color: indigo-light
+---
+
+:: title ::
+
+# 基于Transformer的大语言模型
+
+:: left ::
+
+
+:: right ::
+
+<div style="display: flex; justify-content: center;">
+  <img src="/Figure/transformer.png" width="320" />
+</div>
+
+<div v-click="1" style="position: absolute; top: 260px; left: 600px; right: 240px; height: 160px; background-color: rgba(99, 102, 241, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+  <div style="background-color: #4338ca; padding: 0.5rem 1rem; border-radius: 6px;">
+    <p style="color: white; font-weight: 600; font-size: 1.1rem; margin: 0; text-align: center;">BERT</p>
+  </div>
+</div>
+
+
+<div v-click="1" style="position: absolute; top: 120px; left: 750px; right: 100px; height: 310px; background-color: rgba(184, 241, 99, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+  <div style="background-color: #506720ff; padding: 0.5rem 1rem; border-radius: 6px;">
+    <p style="color: white; font-weight: 600; font-size: 1.1rem; margin: 0; text-align: center;">GPT</p>
   </div>
 </div>
