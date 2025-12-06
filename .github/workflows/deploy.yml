@@ -33,7 +33,7 @@ jobs:
 
       - name: Build all lecture slides
         run: |
-          for dir in lecture*/; do
+          for dir in lecture*/ southeastern_univ/; do
             if [ -f "$dir/package.json" ]; then
               echo "Building $dir"
               cd $dir
