@@ -19,9 +19,9 @@ layout: intro
 colorSchema: light
 
 fonts:
-  sans: 'Noto Sans SC'
-  serif: 'Noto Serif SC'
-  mono: 'Roboto Mono'
+  sans: 'Noto Sans SC, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+  serif: 'Noto Serif SC, serif'
+  mono: 'Roboto Mono, monospace'
   provider: google
 
 css: unocss
@@ -868,6 +868,32 @@ align: lt
 
 
 ---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# 小结:词向量在社会科学中的应用可能性及注意点
+
+:: content ::
+
+<v-clicks depth="4">
+
+- 词向量技术为社会科学研究提供了一种强大的工具，可以帮助研究者捕捉和量化文本数据中的复杂语义信息
+    - 词向量作为一种灵活的文本表示方法，可以和多种向量计算分析框架相结合([Arseniev-Koehler et al., (2022)](https://journals.sagepub.com/doi/10.1177/00491241221122603); [Grand et al., (2022)](https://www.nature.com/articles/s41562-022-01316-8); [Hiroaki et al., 2023](https://aclanthology.org/2023.emnlp-main.283/))
+    - 多样化的语料库和向量分析方法扩宽了社会科学实证分析的广度和时间跨度
+
+- 词向量在社会科学上的应用需要建立在对于词向量技术的正确理解之上
+   - 词向量模型的训练结果高度依赖于所使用的语料库
+   - 词向量模型的参数选择和训练方法会显著影响其表示能力, 需要谨慎选择和调整
+       - 必要时采取人类评估
+   - Context Space 与 Concept Space 之间的区别[(Boutyline & Arseniev-Koehler, 2025)](https://www.annualreviews.org/content/journals/10.1146/annurev-soc-090324-024027): 词向量捕捉的是词语在特定语料库中的共现模式, 而非词语的本质含义　
+
+</v-clicks>
+
+---
 layout: section
 color: indigo-light
 ---
@@ -925,14 +951,15 @@ color: indigo-light
 
 ---
 layout: top-title-two-cols
-columns: is-7
+columns: is-6
 align: l-lt-lt
 color: indigo-light
 ---
 
+
 :: title ::
 
-# 大语言模型的核心架构:Transformer
+# 大语言模型的核心架构:Transformer [(Vaswani et al., 2017)](https://dl.acm.org/doi/10.5555/3295222.3295349)
 
 
 :: left ::
@@ -991,14 +1018,14 @@ const toggleAttentionImage = () => {
   <img src="/Figure/transformer.png" width="320" />
 </div>
 
-<div v-click="1" style="position: absolute; top: 260px; left: 600px; right: 240px; height: 160px; background-color: rgba(99, 102, 241, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+<div v-click="1" style="position: absolute; top: 260px; left: 560px; right: 280px; height: 160px; background-color: rgba(99, 102, 241, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
   <div style="background-color: #4338ca; padding: 0.5rem 1rem; border-radius: 6px;">
     <p style="color: white; font-weight: 600; font-size: 1.1rem; margin: 0; text-align: center;">Encoder</p>
   </div>
 </div>
 
 
-<div v-click="1" style="position: absolute; top: 120px; left: 750px; right: 100px; height: 310px; background-color: rgba(184, 241, 99, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
+<div v-click="1" style="position: absolute; top: 120px; left: 700px; right: 140px; height: 310px; background-color: rgba(184, 241, 99, 0.5); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
   <div style="background-color: #506720ff; padding: 0.5rem 1rem; border-radius: 6px;">
     <p style="color: white; font-weight: 600; font-size: 1.1rem; margin: 0; text-align: center;">Decoder</p>
   </div>
@@ -1006,19 +1033,29 @@ const toggleAttentionImage = () => {
 
 
 ---
-layout: top-title-two-cols
-columns: is-7
+layout: section
+color: indigo-light
+---
+
+
+# 大语言模型与社会科学
+<hr>
+
+大语言模型的发展带来的社会科学研究中的新机遇和方向
+
+---
+layout: top-title
 color: indigo-light
 align: lt
 ---
 
 :: title ::
 
-# 大语言模型的通用性
+# 大语言模型作为文本分析的工具
 
 :: content ::
 
-> “几乎所有 NLP 任务”都能转化为文本生成
+> “几乎所有 NLP 任务”都能转化为文本生成 [(Brown et al., 2020)](https://arxiv.org/abs/2005.14165)
 
 
 
@@ -1031,17 +1068,49 @@ align: lt
 
 
 ---
-layout: section
+layout: top-title-two-cols
 color: indigo-light
+align: l-lt-lb
 ---
 
+:: title ::
 
-# 大语言模型在`社会模拟`中的应用 
-<hr>
+# 大语言模型智能体 (LLMs Agent)
 
-比较基于大语言模型的社会模拟与传统社会模拟方法, 讨论其应用方向
+:: left ::
+
+🤖 Agent: 能够感知环境、做出决策并采取行动的实体
+
+- LLMs Agent: 以大语言模型为核心进行推理、决策和行动的智能体
 
 
+⭐️ LLM Agent为社会科学研究带来的新机遇和方向
+
+- LLM-based Agent作为社会模拟的新框架
+
+- LLM Agent 与人类互动带来的Human–Machine社会中的新课题
+
+:: right ::
+
+<div style="display: flex; justify-content: center;">
+  <img src="/Figure/LLM_agent.png" width="700" />
+</div>
+
+
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+:: title ::
+
+# 社会模拟: 社会事实状况的再现(?)
+
+:: content ::
+
+<div style="display: flex; justify-content: center;">
+  <img src="/Figure/hinan2.gif" width="600" />
+</div>
 
 ---
 layout: top-title
@@ -1089,22 +1158,83 @@ Agent 的特征和行为通过数学形式化来定义
 </AdmonitionType>
 
 
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# 社会模拟的目标
+
+:: content ::
+
+<script setup>
+import { ref } from 'vue'
+const showFrameworkImage = ref(false)
+const toggleFrameworkImage = () => {
+  showFrameworkImage.value = !showFrameworkImage.value
+}
+</script>
+
+<div style="position: relative;">
+
+<div :style="{ opacity: showFrameworkImage ? 0.1 : 1, transition: 'opacity 0.3s' }">
+
+<v-clicks depth="4">
+
+- 社会模拟的不同方向性
+  - **预测性模拟**: 通过建立尽可能再现事实状况的模拟来预测社会现象的未来发展趋势
+      - 例如: 灾难发生时人口的疏散路径预测
+  - **解释性模拟**: 通过模拟来理解和解释社会现象的成因和机制
+      - 例如: Schelling模型解释了即使个体具有较低的偏好,也会导致高度隔离的社会结构
+
+- 计算社会科学的目标: solution-oriented[(Watts, 2017)](https://www.nature.com/articles/s41599-023-01577-2?fromPaywallRec=false); 解释与预测的结合 [(Hofman et al., 2021)](https://www.nature.com/articles/s41586-021-03659-0)
+
+
+<div style="display: flex; justify-content: center;">
+  <img src="/Figure/css_framework.png" width="400" @click="toggleFrameworkImage" style="cursor: pointer;" />
+</div>
+
+</v-clicks>
+
+</div>
+
+<div v-if="showFrameworkImage" @click="toggleFrameworkImage" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; background-color: rgba(255, 255, 255, 0.95); padding: 2rem;">
+  <div style="display: flex; flex-direction: column; max-width: 90%; max-height: 80vh;">
+    <img src="./Figure/css_framework.png" alt="CSS Framework" style="max-width: 100%; max-height: 75vh; width: auto; height: auto; object-fit: contain; border-radius: 8px 8px 0 0; box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); display: block; margin: 0 auto;" />
+  </div>
+</div>
+
+</div>
 
 ---
-transition: slide-up
-level: 2
+layout: top-title
+color: indigo-light
+align: lt
 ---
 
-# LLMs Agent的应用: Generative Agents 
+:: title ::
+
+# 基于LLMs Agent的社会模拟: Generative Agents 
+
+:: content ::
 
 <div grid="~ cols-2 gap-4">
 <div>
 
-- ​部署了25个生成式智能体，每个智能体都通过LLMs设置了独特的背景信息、日常计划和行为目标。
+- ​部署了25个生成式智能体，每个智能体都通过LLMs设置了独特的背景信息、日常计划和行为目标 [(Park et al., 2023)](https://dl.acm.org/doi/fullHtml/10.1145/3586183.3606763)。
     - 记忆（Memory）：​以自然语言形式存储和检索过往经验。​
     - 反思（Reflection）：​对记忆进行整合，形成高层次的洞察，以指导未来行为。​
     - 规划（Planning）：​制定和调整日常计划，响应环境变化。
 - 在没有预设的情况下，==智能体之间自发产生了社交行为==
+
+<Admonition title="社会模拟之中" color="indigo-light" custom="text-lg font-bold" customTitle="text-red-500">
+Agent的行为和互动通过大语言模型生成的自然语言进行表达
+</Admonition>
+
+
 </div>
 
 <div>
@@ -1112,11 +1242,110 @@ level: 2
 <div style="display: flex; justify-content: center;">
   <img src="./Figure/generative-ai.png" width="500" />
 </div>
+
+<div style="display: flex; justify-content: center; margin-top: 2rem;">
+  <img src="./Figure/gene-memory.jpg" width="500" />
+</div>
+
 </div>
 </div>
+
+
 
 <div class="abs-br m-6 text-xl">
   <a href="https://arxiv.org/abs/2304.03442" target="_blank" class="slidev-icon-btn">
     <carbon:document />
   </a>
 </div>
+
+
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# 基于LLMs Agent社会模拟的机遇
+
+:: content ::
+
+<div class="grid grid-cols-3 gap-4">
+  <div style="display: flex; justify-content: center;" v-click="1">
+    <img src="./Figure/frame1.png" width="300" />
+  </div>
+  <div style="display: flex; justify-content: center;" v-click="2">
+    <img src="./Figure/frame2.png" width="300" />
+  </div>
+  <div style="display: flex; justify-content: center;" v-click="3">
+    <img src="./Figure/frame3.png" width="300" />
+  </div>
+</div>
+
+<Admonition title="需要注意的是" color="indigo-light" custom="text-lg font-bold" customTitle="text-red-500" v-click="4">
+即便是LLMs Agent的社会模拟, 仍然需要谨慎对待其在解释性和预测性方面的局限性
+</Admonition>
+
+
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# 社会科学中基于LLMs Agent社会模拟的挑战
+
+:: content ::
+
+<v-clicks depth="4">
+
+- LLMs 是在统计相关性基础上生成文本，不具备真实的心理结构或动机系统
+    - LLM 的行为是“拟人化生成”, 并不意味着它具有同样的认知过程和遵循同样的因果机制
+
+<Admonition title="LLM 可能“模拟出正确的结果”，但可能基于错误的机制" color="indigo-light" custom="text-lg font-bold" customTitle="text-red-500" v-click="3">
+
+- LLM Agent再现了许多人类相关的心理学和社会学现象 ([Dorottya Demszky et al., 2023](https://www.nature.com/articles/s44159-023-00241-5))
+    - ❓Agent 内部真的模拟了规范内化・社会认同等心理机制
+    - 🤔在训练语料中隐含的特定语言模式
+</Admonition>
+
+- 没有真实机制就无法在“反事实场景”中可靠外推
+   - LLM的行为本身缺乏透明的因果结构: 内部机制是数十亿参数的复杂非线性映射
+   - ==解释与预测的结合，有助于将 LLM 的模拟结果从“黑箱现象”提升为“可检验理论的材料”==
+
+</v-clicks>
+
+
+---
+layout: top-title-two-cols
+columns: is-6
+align: l-lt-lt
+color: indigo-light
+---
+
+:: title ::
+
+# LLMs Agent带来新的社会科学课题
+
+
+:: left ::
+
+- LLM agents逐渐具备以自然语言与人类进行交流、协作与互动的能力
+    - 从传统意义上的技术工具转变为==参与社会互动的主体==
+
+- 当前的主流社会学以人类的互动行为为前提  
+- ==“人—AI 共在”的情境下重新理解== ➡️
+   - *A new sociology of humans and machines* [(Tsvetkova et al., 2024)](https://www.nature.com/articles/s41562-024-02001-8)
+   - 人类与LLM agents之间的互动如何塑造社会结构和秩序
+   - 人类之间的互动如何受到LLM agents的影响
+
+:: right ::
+
+<div style="display: flex; justify-content: center; margin-top: 2rem;">
+  <img src="./Figure/human-machine2.png" width="300" />
+</div>
+
+
