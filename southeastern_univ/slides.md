@@ -49,7 +49,7 @@ mermaid:
 2025年12月8日・东南大学
 
 <div style="margin-top: 3rem;">
-<QRCode value="https://sli.dev" :size="100" render-as="svg" />
+<QRCode value="https://lvzeyu.github.io/social_science_nlp_tutorial/southeastern_univ/" :size="100" render-as="svg" />
 </div>
 
 
@@ -154,6 +154,9 @@ const toggleImage3 = () => {
 </div>
 
 
+<div style="position: absolute; top: 4rem; right: 1rem;">
+<QRCode value="https://lvzeyu.github.io/social_science_nlp_tutorial/southeastern_univ/" :size="100" render-as="svg" />
+</div>
 
 
 
@@ -206,7 +209,7 @@ align: lt
 
 
 - 自然语言处理（NLP: Natural Language Processing）是一系列让计算机处理人类日常使用的自然语言的技术
-    - 对于计算机而言，处理像人类语言这样缺乏明确规则的非结构化数据往往是十分困难的任务
+    - 对于计算机而言，<span v-mark.red="1">处理像人类语言这样缺乏明确规则的非结构化数据往往是十分困难的任务</span>
 
 
 <div v-click style="position: absolute; top: 280px; left: 280px; right: 530px; height: 200px; background-color: rgba(99, 102, 241, 0.1); border-radius: 8px; z-index: 0; display: flex; align-items: center; justify-content: center; padding: 1rem;">
@@ -257,7 +260,7 @@ title: Side Title Layout (Another)
   - 几乎所有机器学习与深度学习算法也都要求输入为向量或矩阵
 
 - 以将文本的更小单位（如词语）表示为向量作为出发点
-    - **词向量**: 将每个词映射为一个固定维度的实数向量
+    - **词向量**: <span v-mark.red="3">将每个词映射为一个固定维度的实数向量</span>
     - 可以在后续处理中将每个词的向量表示组合成整个文本的表示
 </v-clicks>
 
@@ -310,7 +313,7 @@ align: lt
 <v-clicks depth="2">
 
 - 假设我们有以下英文句子："I like NLP and AI"
-- ==为文本中的每个独立词构建一个词汇表，并为每个词分配一个唯一的索引==
+- <span v-mark.red="1">为文本中的每个独立词构建一个词汇表，并为每个词分配一个唯一的索引</span>
 - 该向量只有一个位置为 1（对应该词的索引），其余为 0
 
 | 词语   | One-hot Encoding        |
@@ -344,8 +347,8 @@ title: Side Title Layout (Another)
     - 学习效率低
     - ...
 - 无法反映语义关系
-    - 向量之间的距离或夹角==应当可以==反映词语间的语义相似程度或者联系
-    - 词之间的语义关系==应当可以==通过向量运算表达
+    - 向量之间的距离或夹角<span v-mark.red="3">应当可以</span>反映词语间的语义相似程度或者联系
+    - 词之间的语义关系<span v-mark.red="3">应当可以</span>通过向量运算表达
 
 </v-clicks>
 
@@ -542,6 +545,7 @@ align: lt
        - Word2vec可以实现对于语义的定量化表达,实现不同时期的系统性分析
        - Word2vec的词向量表达依赖于训练语料库, 反映语料库中呈现的词语共现模式和语义关系
            - 不同时代的语料库可以反映相应时代背景下下特定概念的语义特质
+
 </v-clicks>
  
 
@@ -614,14 +618,14 @@ align: lt
 <v-clicks depth="2">
 
 - $\text{Relative Norm Distance} = \sum_{v_m \in M} ( |v_m - v_1|_2 - |v_m - v_2|_2)$
-    - $M$: 参照对象词语（例如职业名称或形容词）的向量集合
+    - $M$: 参照对象词语（例如 <span v-mark.circle.orange="2">职业名称或形容词</span>）的向量集合
     - $v_m$: 集合$M$中每个参照对象词语的词向量
-    - $v_1$: 第一个群体（例如男性）的代表性向量，通过取该群体中若干代表性词语（例如代词或姓氏）的向量的平均值得到
+    - $v_1$: 第一个群体（例如男性）的代表性向量，通过取该群体中若干代表性词语的向量的平均值得到
     - $v_2$: 第二个群体（例如女性）的代表性向量，同样通过取该群体中若干代表性词语的向量的平均值得到
     - $|u-v|_2$: 向量$u$和$v$之间的欧几里得距离的平方
 - 指标含义
-    - 负值表示参照对象词语更倾向于与第一个群体相关联
-    - 正值表示参照对象词语更倾向于与第二个群体相关联
+    - <span v-mark.red="2">负值表示参照对象词语更倾向于与第一个群体(男性)相关联</span>
+    - <span v-mark.red="2">正值表示参照对象词语更倾向于与第二个群体(女性)相关联</span>  
     - ==绝对值表示与其中一个群体的关联性程度==
 </v-clicks>
 
@@ -637,11 +641,11 @@ align: l-lb-lb
 
 :: left ::
 
-<div style="display: flex; justify-content: center; margin-top: 3rem;">
+<div style="display: flex; justify-content: center; margin-top: 3rem;" v-click="1">
   <img src="/Figure/pnas_fig.jpeg" width="550" />
 </div>
 
-<div style="margin-top: 1.5rem;">
+<div style="margin-top: 1.5rem;" v-click="1">
 
 - 比较词向量和外部数据(职业的性别比例)中反映的偏见趋势
 
@@ -649,11 +653,11 @@ align: l-lb-lb
 
 :: right ::
 
-<div style="display: flex; justify-content: center; margin-top: 3rem;">
+<div style="display: flex; justify-content: center; margin-top: 3rem;" v-click="2">
   <img src="/Figure/pnas_fig02.jpeg" width="550" />
 </div>
 
-<div style="margin-top: 1.5rem;">
+<div style="margin-top: 1.5rem;" v-click="2">
 
 - 比较词向量和外部数据(职业的性别比例差距)中反映的偏见趋势变化
 
@@ -681,7 +685,7 @@ align: lt
     - ==不同阶层维度之间关系的动态变化==
         - 基于不同历史时期的语料训练的词向量模型可以反映随时间演变的动态变化
 
-- [Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)详细阐述了如何利用词向量技术实现针对复杂概念的解构
+- [Kozlowski, Taddy, & Evans (2019)](https://journals.sagepub.com/doi/full/10.1177/0003122419877135)详细阐述了如何利用词向量技术实现针对<span v-mark.circle.orange="6">复杂概念的解构</span>
     - 利用词向量的计算构建理解特定复杂概念的维度
     - 利用词向量的计算理解概念与维度之间的关系
     - 利用词向量的计算理解不同维度之间的关系
@@ -708,8 +712,8 @@ title: Side Title Layout (Another)
 
 - **构建维度**: 计算一组具有相反语义的词语集合之间词向量差的平均值
     - 构建“*富裕*”维度: 计算 $rich - poor$，$priceless - worthless$等词对的向量差的平均值
-- **词语在文化维度上的投影**: 通过计算其他词语的向量在这个维度向量上的正交投影（即余弦相似度），来确定该词语与该文化维度的关联程度
-    - 某个词语的向量与文化维度向量之间的夹角越小, 说明它们之间的关系越紧密(余弦相似度越高)
+- **词语在文化维度上的投影**: 通过计算其他词语的向量与维度向量的即余弦相似度，来确定该词语与<span v-mark.red="3">特定文化维度的关联程度</span>
+    - 某个词语的向量与文化维度向量之间的余弦相似度越高, 说明它们之间的关系越紧密
 
 </v-clicks>
 
@@ -736,9 +740,7 @@ title: Side Title Layout (Another)
 
 <v-clicks depth="3">
 
-- **不同维度之间的关系**: 通过计算不同文化维度向量之间的角度（余弦相似度），可以了解这些维度在文化意义上的关联性和独立性
-    - 如果两个维度的向量之间的角度接近90度，则表明它们在语义概念上相对独立
-- 基于在不同时期语料库上训练的词向量模型可以帮助理解维度关系的演变
+- 基于在不同时期语料库上训练的词向量模型和向量计算可以帮助理解维度关系的演变
 
 </v-clicks>
 
@@ -748,8 +750,9 @@ title: Side Title Layout (Another)
   <img src="/Figure/Kozlowski-2.jpg" width="480" />
 </div>
 
-- 「富裕」维度在二十世纪初与「文化修养」和「地位」维度最为接近
+- 「富裕」维度在二十世纪初与「文化修养」和「地位」维度之间的联系更加紧密
 - 「富裕」维度与「教育」维度之间的关联性在逐渐增加
+    - *教育成为主流的资源获取和社会流动机制*
 
 ---
 layout: side-title
@@ -800,13 +803,13 @@ align: lt
 <v-clicks depth="4">
 
 - 「Well-being」是一个复杂且多维度的概念
-    - Hedonic Well-being(享乐式幸福):以快乐和痛苦的减少为核心目标，强调短期的满足和愉悦
+    - Hedonic Well-being:以快乐和痛苦的减少为核心目标，强调短期的满足和愉悦
     - Eudaimonic Well-being: 关注 自我实现、个人成长、目标感、意义感，认为幸福不仅仅是快乐，而是实现人的潜力和内在价值
 - 不同时期和社会背景下人们对于Well-being认知侧重的变化
 
 **数据和方法**
 
-- 使用[日本国会图书馆](https://lab.ndl.go.jp/ngramviewer/)提供的包含1910 年代至 1980 年代期间出版的杂志、书籍和官方公报的语料库
+- 使用[日本国会图书馆](https://lab.ndl.go.jp/ngramviewer/)提供的包含1910 年代至 1990 年代期间出版的杂志、书籍和官方公报的语料库
 - 按照年份进行切分为每个时间段训练相应的词向量模型
 
 </v-clicks>
@@ -888,8 +891,8 @@ align: lt
 - 词向量在社会科学上的应用需要建立在对于词向量技术的正确理解之上
    - 词向量模型的训练结果高度依赖于所使用的语料库
    - 词向量模型的参数选择和训练方法会显著影响其表示能力, 需要谨慎选择和调整
-       - 必要时采取人类评估
-   - Context Space 与 Concept Space 之间的区别[(Boutyline & Arseniev-Koehler, 2025)](https://www.annualreviews.org/content/journals/10.1146/annurev-soc-090324-024027): 词向量捕捉的是词语在特定语料库中的共现模式, 而非词语的本质含义　
+       - <span v-mark.circle.orange="6">必要时采取人类评估</span>
+   - Context Space 与 Concept Space 之间的区别[(Boutyline & Arseniev-Koehler, 2025)](https://www.annualreviews.org/content/journals/10.1146/annurev-soc-090324-024027): 词向量捕捉的是词语在<span v-mark.red="8">特定语料库中的共现模式, 而非词语的本质含义</span>
 
 </v-clicks>
 
@@ -1079,12 +1082,12 @@ align: l-lt-lb
 
 :: left ::
 
-🤖 Agent: 能够感知环境、做出决策并采取行动的实体
+🤖 **Agent: 能够感知环境、做出决策并采取行动的实体**
 
 - LLMs Agent: 以大语言模型为核心进行推理、决策和行动的智能体
 
 
-⭐️ LLM Agent为社会科学研究带来的新机遇和方向
+⭐️ **LLM Agent为社会科学研究带来的新机遇和方向**
 
 - LLM-based Agent作为社会模拟的新框架
 
@@ -1337,7 +1340,7 @@ color: indigo-light
     - 从传统意义上的技术工具转变为==参与社会互动的主体==
 
 - 当前的主流社会学以人类的互动行为为前提  
-- ==“人—AI 共在”的情境下重新理解== ➡️
+- ==“人—AI共存”的社会情境下重新理解== ➡️
    - *A new sociology of humans and machines* [(Tsvetkova et al., 2024)](https://www.nature.com/articles/s41562-024-02001-8)
    - 人类与LLM agents之间的互动如何塑造社会结构和秩序
    - 人类之间的互动如何受到LLM agents的影响
@@ -1348,4 +1351,41 @@ color: indigo-light
   <img src="./Figure/human-machine2.png" width="300" />
 </div>
 
+
+
+---
+layout: top-title
+color: indigo-light
+align: lt
+---
+
+:: title ::
+
+# “人—AI共存”的社会情境中解释与预测的结合
+
+:: content ::
+
+- 建立人和LLMs Agent共享的状态空间
+
+- 循环过程：解释 → 预测 → 人–AI相关的社会实证实验 → 解释
+    - 基于解释框架的预测模型
+        - 在全LLM agent的环境里运行大量社会模拟,探索潜在的模式
+    - 人–AI相关的社会实证实验：用人类数据来验证和校准模型预测
+        - 例如: 比较人类在与LLM agent互动时的行为变化
+    - 机制修正与统一
+
+<Admonition title="人类数据与 LLM 数据就可以在共享的状态空间内对齐" color="indigo-light" custom="text-lg font-bold" customTitle="text-red-500" v-click="3">
+
+- LLM Agent和人类面对的信息结构和互动环境是相同的
+- 数据形式一致: 可用同样的统计与因果模型分析
+
+</Admonition>
+
+
+---
+layout: section
+color: indigo-light
+---
+
+# Thanks for your attention!
 
